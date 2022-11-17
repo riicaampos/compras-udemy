@@ -1,0 +1,30 @@
+para criar um alias para as consultas basta usar
+
+{
+ c1: cliente(id: 1){
+  id,nome
+ },
+ c2: cliente(id: 1){
+  id,nome
+ },
+}
+
+para nao ficar repetindo pode ser usando o fragment tambem
+
+framgment clienteFragment on Cliente {
+ id,nome
+}
+
+e depois é só usar assim:
+
+{
+ c1: cliente(id: 1){
+  ...clienteFragment
+ },
+ c2: cliente(id: 1){
+  ...clienteFragment
+ },
+}
+
+para dizer que algo nao pode ser null usamos ! pode ser parametro, retorno é definido no schema
+graphqls
