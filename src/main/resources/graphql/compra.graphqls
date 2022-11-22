@@ -1,0 +1,25 @@
+type Compra {
+    id:ID,
+    quantidade: Int,
+    status: String,
+    cliente: Cliente,
+    produto: Produto
+}
+
+input CompraInput {
+    id:ID,
+    quantidade: Int!,
+    status: String!,
+    cliente: Int!,
+    produto: Int!
+}
+
+extend type Query{
+    findCompraById(id:ID!): Compra!
+    listAll: [Compra]!
+}
+
+extend type Mutation {
+    saveCompra(compra: CompraInput!): Compra!
+    deleteCompraById(id:ID!): String!
+}

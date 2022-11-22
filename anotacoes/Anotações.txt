@@ -28,3 +28,28 @@ e depois é só usar assim:
 
 para dizer que algo nao pode ser null usamos ! pode ser parametro, retorno é definido no schema
 graphqls
+
+
+Resolvers
+
+precisar ser um spring component, normalmente usado quando vc quer resolver um atributo que não
+tem na sua entidade, o metodo deve ter o mesmo nome do atributo no seu schema e deve recerber
+o objeto que esta sendo interceptado, Exemplo
+
+type Cliente{
+  id:ID
+  nome: String
+}
+
+@Component
+
+public class ClienteResolver implements GraphQLResolver<Cliente>{
+
+  public String nome(Cliente c){
+   return "Olá "+c.getNome();
+  }
+
+}
+
+toda vez que for chamado a query q lista os clientes, esse resolver ira interceptar a chamada
+e todos os nome serão retornados com o Olá na frente.

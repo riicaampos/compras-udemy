@@ -2,6 +2,13 @@ type Cliente {
     id: ID,
     nome: String!,
     email: String!
+    compras: [Compra]!
+}
+
+input ClienteI{
+    id: ID,
+    nome: String!,
+    email: String!
 }
 
 extend type Query {
@@ -10,6 +17,6 @@ extend type Query {
 }
 
 extend type Mutation{
-    saveCliente(id:ID, nome: String!, email: String!) : Cliente!
+    saveCliente(cliente: ClienteI) : Cliente!
     deleteCliente(id:ID): String
 }
