@@ -3,6 +3,8 @@ package com.udemy.compras.service;
 import com.udemy.compras.model.Cliente;
 import com.udemy.compras.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class ClienteService implements BasicCrudService<Cliente, Long> {
     }
 
     @Override
+    @Cacheable(value="clientes")
     public List<Cliente> listAll() {
         return this.clienteRepository.findAll();
     }

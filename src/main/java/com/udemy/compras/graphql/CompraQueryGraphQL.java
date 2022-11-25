@@ -8,8 +8,10 @@ import com.udemy.compras.model.Compra;
 import com.udemy.compras.service.ClienteService;
 import com.udemy.compras.service.CompraService;
 import com.udemy.compras.service.ProdutoService;
+import org.apache.commons.lang3.ArrayUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -28,6 +30,9 @@ public class CompraQueryGraphQL implements GraphQLQueryResolver, GraphQLMutation
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private Environment env;
 
     @Transactional
     public Compra saveCompra(CompraI compra){
@@ -52,8 +57,8 @@ public class CompraQueryGraphQL implements GraphQLQueryResolver, GraphQLMutation
         }
     }
 
-    public List<Compra> listAll(){
-        return this.compraService.listAll();
+    public List<Compra> listAll(Integer page, Integer size){
+        return this.compraService.listAll(page,size);
     }
 
     public Compra findCompraById(Long id){

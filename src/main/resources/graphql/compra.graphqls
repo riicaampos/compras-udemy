@@ -1,6 +1,7 @@
 type Compra {
     id:ID,
     quantidade: Int,
+    data: Date,
     status: String,
     cliente: Cliente,
     produto: Produto
@@ -16,7 +17,7 @@ input CompraInput {
 
 extend type Query{
     findCompraById(id:ID!): Compra!
-    listAll: [Compra]!
+    listAll(page:Int = 0, size:Int = 2): [Compra]!
 }
 
 extend type Mutation {

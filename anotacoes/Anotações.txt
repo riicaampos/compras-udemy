@@ -42,7 +42,6 @@ type Cliente{
 }
 
 @Component
-
 public class ClienteResolver implements GraphQLResolver<Cliente>{
 
   public String nome(Cliente c){
@@ -53,3 +52,30 @@ public class ClienteResolver implements GraphQLResolver<Cliente>{
 
 toda vez que for chamado a query q lista os clientes, esse resolver ira interceptar a chamada
 e todos os nome serão retornados com o Olá na frente.
+
+Voce pode passar parametros no resolver tambem
+
+type Cliente{
+  id:ID
+  nome(apelido: String): String
+}
+
+ai o resolver fica
+
+@Component
+public class ClienteResolver implements GraphQLResolver<Cliente>{
+
+  public String nome(Cliente c, String apelido){
+   return "Olá "+c.getNome()+" seu apelido é "+apelido;
+  }
+
+}
+
+toda exception que for de uma mutation vem encapsulada em ExceptionWhileDataFetching
+
+Para test você deve extender a classe GraphQLTestTemplate
+
+Quando você ta trabalhando com cache, as consultas que são por id, por padrão elas ficam em cache,
+as que listam tudo por exemplo o metodo findAll() você precisa implementar, existe 2 opções,
+implementar o cache pelo spring na camada de serviço, ou você pode implementar no repositorio
+pela JPA
